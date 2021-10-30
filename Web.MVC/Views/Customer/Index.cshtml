@@ -1,0 +1,35 @@
+﻿@model Application.ViewModels.Customer.CustomerListViewModel
+
+<div class="row">
+    <a class="btn btn-primary btn-sm" asp-controller="Customer" asp-action="AddOrEdit">Add new</a>
+</div>
+<br />
+<div class="row">
+    <table id="customers" class="table table-bordered table-hover">
+        <thead>
+            <tr class="">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Created On</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr style="height: 60px;">
+                    <td>@customer.FullName</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.PhoneNumber</td>
+                    <td>@customer.Created.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Customer" asp-action="AddOrEdit" asp-route-id="@customer.Id">Edit</a>
+                        <a class="btn btn-info btn-sm" asp-controller="Customer" asp-action="LoanMovie" asp-route-id="@customer.Id">Loan</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

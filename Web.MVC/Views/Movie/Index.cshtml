@@ -1,0 +1,53 @@
+﻿@model Application.ViewModels.Movie.MovieListViewModel
+
+<div class="row">
+    <span class="">Total Movies: @Model.Total</span>
+</div>
+<br />
+<div class="row">
+    <a class="btn btn-primary btn-sm" asp-controller="Movie" asp-action="AddOrEdit">Add Movie</a>
+</div>
+<br />
+<br />
+
+<div class="row">
+    <table id="movie" class="table table-bordered table-hover">
+        <thead>
+            <tr class="">
+                <th>Poster</th>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Duration In Minutes</th>
+                <th>Genre</th>
+                <th>Director In Minutes</th>
+                <th>In Stock</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr style="height: 50px;">
+                    <td>
+                        @if (movie.ImageUrl != null)
+                        {
+                            <img src="@Url.Content(movie.ImageUrl)" width="100" height="150" alt="image" />
+                        }
+
+                    </td>
+                    <td>@movie.Title</td>
+                    <td>@movie.ReleaseDate</td>
+                    <td>@movie.DurationInMinutes</td>
+                    <td>@movie.Genre</td>
+                    <td>@movie.Director</td>
+                    <td>@movie.InStock</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Movie" asp-action="AddOrEdit" asp-route-id="@movie.Id">Edit</a>
+                        <a class="btn btn-info btn-sm" asp-controller="Movie" asp-action="Loan" asp-route-id="@movie.Id">Loan</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
